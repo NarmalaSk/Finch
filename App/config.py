@@ -1,8 +1,8 @@
 import os
 
 POSTGRES = {
-    'user': 'your_user',
-    'pw': 'your_password',
+    'user': 'finch_user',
+    'pw': 'password',
     'db': 'finch_db',
     'host': 'localhost',
     'port': '5432',
