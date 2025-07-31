@@ -1,69 +1,80 @@
 name: Finch CiCd
 
-
 on:
   push:
-     branches:
-          - main
+    branches:
+      - main
+
 jobs:
   build:
-   runs-on: ubuntu-latest
-   
-   steps:
-     - name: Code Checkout
-       uses: actions/checkout@v4
+    runs-on: ubuntu-latest
 
-  
-     - name: Install Dependencies
-       run: |
-            cd App
-            pip install -r requirements.txt
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
-     - name: Unit Tests
-       run: |
-            cd App
-            pytest tests/test_routes.py
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
 
+      - name: Wait for PostgreSQL
+        run: |
+          until pg_isready -h localhost -U postgres; do
+            echo "Waiting for PostgreSQL to be ready..."
+            sleep 2
+          done
 
-     - name: Lint with flake8
-       run: |
+      - name: Install PostgreSQL client
+        run: sudo apt-get install -y postgresql-client
+
+      - name: Create finch_user and finch_db
+        env:
+          PGPASSWORD: postgres
+        run: |
+          psql -h localhost -U postgres -c "CREATE USER finch_user WITH PASSWORD 'password';"
+          psql -h localhost -U postgres -c "CREATE DATABASE finch_db OWNER finch_user;"
+          psql -h localhost -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE finch_db TO finch_user;"
+
+      - name: Install Dependencies
+        run: |
+          cd App
+          pip install -r requirements.txt
+
+      - name: Run Unit Tests
+        env:
+          PGUSER: finch_user
+          PGPASSWORD: password
+          PGHOST: localhost
+          PGPORT: 5432
+          PGDATABASE: finch_db
+        run: |
+          cd App
+          pytest tests/test_routes.py
+
+      - name: Lint with flake8
+        run: |
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 
-     - name: Run tests with coverage
-       run: |
-          pytest --cov=your_module_name --cov-report=xml 
+      - name: Run tests with coverage
+        run: |
+          cd App
+          pytest --cov=your_module_name --cov-report=xml
 
-     - name: Install Gitleaks
-       run: sudo apt install gitleaks
+      - name: Install Gitleaks
+        run: sudo apt install -y gitleaks
 
-     - name: Run Gitleaks
-       run: |
+      - name: Run Gitleaks
+        run: |
           cd App
           gitleaks detect --source .
-
-         
-  
-# Run Tests
-
-#Code quality and Codec coverage
-
-
-#Owsap or gitleaks
-
-
-# artifact
-
-# nexus
-
-#docker image
-
-
-# image scan
-
-#push to ecr
-
-#deploy to k8s
-
-#post nitification
-
-
