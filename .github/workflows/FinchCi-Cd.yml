@@ -22,7 +22,7 @@ jobs:
      - name: Unit Tests
        run: |
             cd App
-            pytest test_routes.py
+            pytest tests/test_routes.py
 
 
      - name: Lint with flake8
