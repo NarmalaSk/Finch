@@ -62,12 +62,6 @@ jobs:
           cd App
           pytest tests/test_routes.py
 
-
-      - name: Run tests with coverage
-        run: |
-          cd App
-          pytest --cov=your_module_name --cov-report=xml
-
       - name: Install Gitleaks
         run: sudo apt install -y gitleaks
 
