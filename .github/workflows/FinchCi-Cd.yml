@@ -15,10 +15,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Aws Cli setup
-        uses: hsupu/setup-awscli@v1.0.0
+        uses: unfor19/install-aws-cli-action@v1
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4.2.1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
