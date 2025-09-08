@@ -25,7 +25,7 @@ jobs:
         - name: AWS iam login
           uses: aws-actions/configure-aws-credentials@v4
           with:
-              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
               aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
               aws-region: ap-south-1 
 
