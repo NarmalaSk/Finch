@@ -1,4 +1,4 @@
-# Finch
+# Finchs
 Finch is An Ai Application That helps in Exploring Various Startups and Oppurtunities 
 
 File Structure
