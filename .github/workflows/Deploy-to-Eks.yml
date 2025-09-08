@@ -12,8 +12,8 @@ jobs:
         - name: Code Checkout
           uses: actions/checkout@v5.0.0
 
-        - name: Terraform-cdk-action
-          uses: hashicorp/terraform-cdk-action@v10.0.1
+        - name: Setup Terraform Cli
+          uses: hashicorp/setup-terraform@v2.0.3
 
         - name: Test Terraform Installation
           run: terraform init
