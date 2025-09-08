@@ -20,7 +20,7 @@ jobs:
           run: terraform init
 
         - name: Aws Cli Setup
-          run: aws-actions/setup-sam@v2
+          uses: isbang/setup-awscli@v0.1.0
 
         - name: AWS iam login
           uses: aws-actions/configure-aws-credentials@v4
