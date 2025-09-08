@@ -1,1 +1,21 @@
+name: Ci/Cd for Finch to deploy in Eks
 
+on:
+  push:
+     branches:
+          [ main ]
+
+jobs:
+  Infrastructure-EKS-and-RDS:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Code Checkout
+          uses: actions/codecheckout@v4
+
+        - name: Terraform-cdk-action
+          uses: hashicorp/terraform-cdk-action@v10.0.1
+
+        - name: Test Terraform Installation
+          run: terraform init
+
+      
