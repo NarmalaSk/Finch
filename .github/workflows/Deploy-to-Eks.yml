@@ -16,6 +16,7 @@ jobs:
           uses: hashicorp/setup-terraform@v2.0.3
 
         - name: Test Terraform Installation
+          working-directory: ./EKSInfra
           run: terraform init
 
       
