@@ -10,7 +10,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Code Checkout
-          uses: actions/codecheckout@v4
+          uses: actions/checkout@v5.0.0
 
         - name: Terraform-cdk-action
           uses: hashicorp/terraform-cdk-action@v10.0.1
