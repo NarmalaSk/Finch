@@ -1,32 +1,49 @@
-name: Ci/Cd for Finch to deploy in Eks
+name: CI/CD for Finch to deploy in EKS
 
 on:
   push:
-     branches:
-          [ main ]
+    branches:
+      - main
 
 jobs:
-  Infrastructure-EKS-and-RDS:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Code Checkout
-          uses: actions/checkout@v5.0.0
+  infrastructure:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./EKSInfra
 
-        - name: Setup Terraform Cli
-          uses: hashicorp/setup-terraform@v2.0.3
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
 
-        - name: Test Terraform Installation
-          working-directory: ./EKSInfra
-          run: terraform init
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v2
 
-        - name: Aws Cli Setup
-          uses: isbang/setup-awscli@v0.1.0
+      - name: Verify Terraform Installation
+        run: terraform -version
 
-        - name: AWS iam login
-          uses: aws-actions/configure-aws-credentials@v4
-          with:
-              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-              aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-              aws-region: ap-south-1 
+      - name: AWS CLI Setup
+        uses: isbang/setup-awscli@v0.1.0
 
-      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ap-south-1
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve
