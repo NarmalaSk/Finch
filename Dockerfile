@@ -9,10 +9,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy app code
-COPY fastapi_single_file_app.py .
+COPY app.py .
 
 # Expose port
 EXPOSE 8000
 
 # Command to run the app
-CMD ["uvicorn", "fastapi_single_file_app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
