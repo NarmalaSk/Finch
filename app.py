@@ -145,4 +145,5 @@ async def metrics():
 # --- Run with: python fastapi_single_file_app.py ---
 if __name__ == "__main__":
     # Use uvicorn programmatically so it's single-file runnable
-    uvicorn.run("fastapi_single_file_app:app", host="0.0.0.0", port=8000, reload=False)
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=False)
+
