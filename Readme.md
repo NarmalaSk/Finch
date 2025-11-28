@@ -26,6 +26,9 @@ deploy to dev gke cluster
 
 #### push -> prod branch
 deploy-to-prod.yml
+
 code checkout 
+
 gcloud login
+
 deploy to prod cluster GKE
