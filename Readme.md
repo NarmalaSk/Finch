@@ -2,11 +2,17 @@
 
 ### Infrastructure
 Build-infra.yml
+
 Terraform components
+
 1 vpc 
+
 2 gke clusters
+
 1 workload fed identity pool
+
 1 workload fed provider id
+
 1 artifact regsitry
 
 
