@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-    # Allow the job to fetch a GitHub ID token
     permissions:
       id-token: write
       contents: read
@@ -22,11 +21,9 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           create_credentials_file: true
-          workload_identity_provider: 'projects/forward-garden-444210-d7/locations/global/workloadIdentityPools/github/providers/github'
-          service_account: 'githubactions@forward-garden-444210-d7.iam.gserviceaccount.com'
+          workload_identity_provider: 'projects/forward-garden-444210/locations/global/workloadIdentityPools/github/providers/github'
+          service_account: 'githubactions@forward-garden-444210.iam.gserviceaccount.com'
     
-      - name: chcek gcloud
-        run: | 
-              gcloud artifacts repositories list --project=forward-garden-444210
-
-
+      - name: Check gcloud
+        run: |
+          gcloud artifacts repositories list --project=forward-garden-444210
