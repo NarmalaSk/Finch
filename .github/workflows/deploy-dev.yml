@@ -27,8 +27,6 @@ jobs:
     
       - name: chcek gcloud
         run: | 
-              gcloud auth print-access-token \
-                --impersonate-service-account=githubactions@forward-garden-444210-d7.iam.gserviceaccount.com
+              gcloud artifacts repositories list --project=forward-garden-444210
 
-                   gsutil -i githubactions@forward-garden-444210-d7.iam.gserviceaccount.com ls gs://my-ml-dataset/
 
