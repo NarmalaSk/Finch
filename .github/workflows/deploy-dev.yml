@@ -26,4 +26,9 @@ jobs:
           service_account: 'githubactions@forward-garden-444210-d7.iam.gserviceaccount.com'
     
       - name: chcek gcloud
-        run: gcloud info
+        run: | 
+              gcloud auth print-access-token \
+                --impersonate-service-account=githubactions@forward-garden-444210-d7.iam.gserviceaccount.com
+
+                   gsutil -i githubactions@forward-garden-444210-d7.iam.gserviceaccount.com ls gs://my-ml-dataset/
+
