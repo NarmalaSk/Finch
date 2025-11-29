@@ -31,8 +31,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt 
 
-      - name: Run code
-        run: python3 app.py
+    #  - name: Run code
+      #  run: python3 app.py
 
       - name: Build docker image
         uses: docker/setup-docker-action@v4.6.0
