@@ -3,7 +3,7 @@ name: Deploy API to Dev GKE
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build:
