@@ -33,6 +33,10 @@ jobs:
 
     #  - name: Run code
       #  run: python3 app.py
+      - name: Configure Docker for Artifact Registry
+        run: |
+              gcloud auth configure-docker us-south1-docker.pkg.dev
+
 
       - name: Build docker image
         uses: docker/setup-docker-action@v4.6.0
