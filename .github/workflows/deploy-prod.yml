@@ -66,4 +66,4 @@ jobs:
 
 
       - name: Ingress for Service
-        run: kubectl apply -f Manifests/ingressprod.yaml
+        run: kubectl apply -f Manifests/Ingressprod.yaml
