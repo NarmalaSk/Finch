@@ -50,3 +50,17 @@ jobs:
 
       - name: push to Google Artifact registry
         run: docker push us-south1-docker.pkg.dev/forward-garden-444210-d7/finch/finch:v1
+
+
+      - name: Get GKE Credentials
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+              cluster_name: dev-cluster
+              location: us-central-1a
+              project_id: forward-garden-444210-d7
+
+      - name: Deploy finch service
+        run: kubectl apply -f deploymentdev.yaml
+
+      - name: Expose Service
+        run: bectl apply -f servicedev.yaml
