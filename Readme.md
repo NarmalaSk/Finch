@@ -1,4 +1,4 @@
-### setups
+### setup
 
 ### Infrastructure
 Build-infra.yml
