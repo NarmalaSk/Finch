@@ -39,4 +39,10 @@ jobs:
 
 
       - name: docker image build
-        run: docker build .
+        run: docker build . -t finch
+
+      - name: docker tag
+        run: docker tag finch us-south1-docker.pkg.dev/forward-garden-444210-d7/finch/finch:v1
+
+      - name: push to Google Artifact registry
+        run: docker push us-south1-docker.pkg.dev/forward-garden-444210-d7/finch/finch:v1
