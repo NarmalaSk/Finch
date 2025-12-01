@@ -1,4 +1,4 @@
-name: Deploy API to Dev GKE
+name: Deploy API to Prod GKE cluster
 
 on:
   push:
