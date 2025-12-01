@@ -1,4 +1,4 @@
-name: Deploy API to Dev GKE
+name: Deploy API to Dev GKE Cluster
 
 on:
   push:
@@ -63,4 +63,7 @@ jobs:
         run: kubectl apply -f deploymentdev.yaml
 
       - name: Expose Service
-        run: bectl apply -f servicedev.yaml
+        run: kubectl apply -f servicedev.yaml
+
+      - name: Ingress for Finch
+        run: kubectl apply -f ingressdev.yaml
