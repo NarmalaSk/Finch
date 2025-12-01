@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: python-api-ingress
+  name: finch-api-ingress
   annotations:
     kubernetes.io/ingress.class: "gce"     # For GKE
 spec:
@@ -12,6 +12,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: python-dev-api-service
+                name: finch-dev-service
                 port:
                   number: 80
