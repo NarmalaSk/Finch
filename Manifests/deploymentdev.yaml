@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: finch
-        image: us-south1-docker.pkg.dev/forward-garden-444210-d7/finch
+        image: us-south1-docker.pkg.dev/forward-garden-444210-d7/finch/finch:v1
         ports:
         - containerPort: 8080
 
