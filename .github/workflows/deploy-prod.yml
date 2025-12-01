@@ -1,1 +1,53 @@
+name: Deploy API to Dev GKE
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    permissions:
+      id-token: write
+      contents: read
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: 'google-github-actions/auth@v3'
+        with:
+              service_account: 'my-service-account@forward-garden-444210-d7.iam.gserviceaccount.com' # my-service-account@my-project.iam.gserviceaccount.com
+              workload_identity_provider: 'projects/341213114487/locations/global/workloadIdentityPools/githubactions/providers/my-repo' # "projects/123456789/locations/global/workloadIdentityPools/github/providers/my-repo"
+    
+      - name: Check gcloud
+        run: |
+          gcloud artifacts repositories list 
+
+      - name: setup python
+        uses: actions/setup-python@v6.1.0
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt 
+
+    #  - name: Run code
+      #  run: python3 app.py
+      - name: Configure Docker for Artifact Registry
+        run: |
+              gcloud auth configure-docker us-south1-docker.pkg.dev
+
+
+      - name: Build docker image
+        uses: docker/setup-docker-action@v4.6.0
+
+
+      - name: docker image build
+        run: docker build . -t finch
+
+      - name: docker tag
+        run: docker tag finch us-south1-docker.pkg.dev/forward-garden-444210-d7/finch/finch:v1
+
+      - name: push to Google Artifact registry
+        run: docker push us-south1-docker.pkg.dev/forward-garden-444210-d7/finch/finch:v1
 
