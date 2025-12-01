@@ -63,3 +63,7 @@ jobs:
 
       - name: Expose Service
         run: kubectl apply -f Manifests/servicedev.yaml
+
+
+      - name: Ingress for Service
+        run: kubectl apply -f Manifests/ingressprod.yaml
