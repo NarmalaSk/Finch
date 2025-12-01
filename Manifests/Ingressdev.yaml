@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: python-api-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"     # For GKE
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: python-dev-api-service
+                port:
+                  number: 80
