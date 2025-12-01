@@ -62,4 +62,4 @@ jobs:
         run: kubectl apply -f Manifests/deploymentdev.yaml
 
       - name: Expose Service
-        run: bectl apply -f Manifests/servicedev.yaml
+        run: kubectl apply -f Manifests/servicedev.yaml
