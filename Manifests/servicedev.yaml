@@ -1,1 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: finch-service
+spec:
+  type: LoadBalancer   # or ClusterIP / NodePort
+  selector:
+    app: finch
+  ports:
+  - port: 80           # external port
+    targetPort: 8080   # container port from your Deployment
+
 

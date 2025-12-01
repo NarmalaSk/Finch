@@ -1,1 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finch-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: finch
+  template:
+    metadata:
+      labels:
+        app: finch
+    spec:
+      containers:
+      - name: finch
+        image: us-south1-docker.pkg.dev/forward-garden-444210-d7/finch
+        ports:
+        - containerPort: 8080
+
+
 
