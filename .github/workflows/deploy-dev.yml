@@ -60,10 +60,10 @@ jobs:
               project_id: forward-garden-444210-d7
 
       - name: Deploy finch service
-        run: kubectl apply -f deploymentdev.yaml
+        run: kubectl apply -f Manifests/deploymentdev.yaml
 
       - name: Expose Service
-        run: kubectl apply -f servicedev.yaml
+        run: kubectl apply -f Manifests/servicedev.yaml
 
       - name: Ingress for Finch
-        run: kubectl apply -f ingressdev.yaml
+        run: kubectl apply -f Manifests/ingressdev.yaml
