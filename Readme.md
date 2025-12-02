@@ -1,14 +1,14 @@
 ### Finch service
 
-### CI/CD Flow
-<img width="1235" height="501" alt="image" src="https://github.com/user-attachments/assets/5a5f0874-7b41-4f57-9053-8956851a6367" />
-
 Python fastapi service runs on port 8080 with endpoints
 ```
 http://service/health
 http://service/api
 ...
 ```
+### CI/CD Flow
+<img width="1235" height="501" alt="image" src="https://github.com/user-attachments/assets/5a5f0874-7b41-4f57-9053-8956851a6367" />
+
 
 ### Workload Federation Pool and Provider
 
