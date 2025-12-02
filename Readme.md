@@ -1,4 +1,8 @@
 ### Finch service
+
+### cicd flow
+<img width="1235" height="501" alt="image" src="https://github.com/user-attachments/assets/5a5f0874-7b41-4f57-9053-8956851a6367" />
+
 Python fastapi service runs on port 8080 with endpoints
 ```
 http://service/health
