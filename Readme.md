@@ -1,40 +1,44 @@
-### setup
+### Finch service
+Python fastapi service runs on port 8080 with endpoints
+```
+http://service/health
+http://service/api
+...
+```
+
+### Workload Federation Pool and Provider
+
+Just create a workload federation id using service impersonation or direct access
+Docs for Creating WIF gihtub[https://github.com/google-github-actions/auth]
+
+Just replace the Principal id and service acc email in build infra.yml file
+
 
 ### Infrastructure
-Build-infra.yml
 
-Terraform components
+Intro Finch is a sample fast api runs using unicorn I have deployed the api in Google kubernetes engine 
+Infrastructure I have used is 2 Google Kubernetes Clusters
 
-1 vpc 
+To create Infra just run
 
-2 gke clusters
-
-1 workload fed identity pool
-
-1 workload fed provider id
-
-1 artifact regsitry
-
+spin-infra workflow 
+- It creates Two gke clusters for Development and Production in us-central1-a region
 
 
 ### CICD
-deploy-to-dev.yml
-#### push -> dev branch
-Code chechkout
 
-code tests
+The github action workflow basically buils docker image and deploys to app to gke and exposes as service
 
-build docker image 
+Replace this creds in the deploy-dev and deploy-prod workflows 
+```
+regsitry url
+cluster name
+region
+service account 
+principal id
+```
 
-push to registry
+### Run dev&prod Pipeline
 
-deploy to dev gke cluster 
-
-#### push -> prod branch
-deploy-to-prod.yml
-
-code checkout 
-
-gcloud login
-
-deploy to prod cluster GKE
+Create a dev Branch ,commit a small change dev pipeline runs
+same for prod make commit in main branch
