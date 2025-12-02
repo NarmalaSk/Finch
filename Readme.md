@@ -25,7 +25,7 @@ Infrastructure I have used is 2 Google Kubernetes Clusters
 
 To create Infra just run
 
-spin-infra workflow 
+spin-infra workflow from actions tab
 - It creates Two gke clusters for Development and Production in us-central1-a region
 
 
