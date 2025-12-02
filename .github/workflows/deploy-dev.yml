@@ -18,8 +18,8 @@ jobs:
 
       - uses: 'google-github-actions/auth@v3'
         with:
-              service_account: 'my-service-account@forward-garden-444210-d7.iam.gserviceaccount.com' # my-service-account@my-project.iam.gserviceaccount.com
-              workload_identity_provider: 'projects/341213114487/locations/global/workloadIdentityPools/githubactions/providers/my-repo' # "projects/123456789/locations/global/workloadIdentityPools/github/providers/my-repo"
+              service_account:  # my-service-account@my-project.iam.gserviceaccount.com
+              workload_identity_provider:  # "projects/123456789/locations/global/workloadIdentityPools/github/providers/my-repo"
     
       - name: Check gcloud
         run: |
@@ -46,18 +46,17 @@ jobs:
         run: docker build . -t finch
 
       - name: docker tag
-        run: docker tag finch us-south1-docker.pkg.dev/forward-garden-444210-d7/finch/finch:v1
+        run: docker tag finch #Registryurl:Image:Tag
 
       - name: push to Google Artifact registry
-        run: docker push us-south1-docker.pkg.dev/forward-garden-444210-d7/finch/finch:v1
-
+        run: docker push #Registryurl:Image:Tag
 
       - name: Get GKE Credentials
         uses: google-github-actions/get-gke-credentials@v2
         with:
-              cluster_name: dev-cluster
-              location: us-central-1a
-              project_id: forward-garden-444210-d7
+              #cluster_name: 
+              #location: 
+              # project_id: 
 
       - name: Deploy finch service
         run: kubectl apply -f Manifests/deploymentdev.yaml
